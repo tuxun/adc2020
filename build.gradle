@@ -1,0 +1,61 @@
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+	}
+}
+plugins {
+	id 'application'
+}
+apply plugin: 'java'
+
+mainClassName = 'org.tflsh.adc2020.Exo1'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+compileJava {
+	// Suppress warnings about internal api usage - https://stackoverflow.com/a/19553686/6238618
+	options.fork = true
+	options.forkOptions.executable = 'javac'
+	options.compilerArgs << '-XDignore.symbol.file'
+}
+
+
+repositories {
+	jcenter()
+	mavenCentral()
+}
+
+dependencies {
+
+}
+
+
+
+println 'This is executed during configuration phase'
+task configured {
+	println 'The project is configured'
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'org.tflsh.adc2020.Exo1'
+	}}
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+		resources {
+			srcDirs = ['resources']
+		}
+	}
+
+	test {
+		java {
+			srcDirs = ['test']
+		}
+	}
+}
